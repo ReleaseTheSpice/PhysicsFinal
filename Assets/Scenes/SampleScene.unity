@@ -412,4 +412,5 @@ MonoBehaviour:
   mass: 1
   radius: 10
   angularMomentum: 1000
+  shapeConstant: 0.5
   angularVelocity: 0

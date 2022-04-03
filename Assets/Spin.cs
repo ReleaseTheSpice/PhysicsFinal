@@ -14,6 +14,8 @@ public class Spin : MonoBehaviour
     [MinAttribute(0)]
     public float angularMomentum;
 
+    public float shapeConstant;
+
     private float momentOfInertia;
     
     [Header("Angular Velocity")]
@@ -22,7 +24,11 @@ public class Spin : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        momentOfInertia = mass * radius * radius;
+        if (shapeConstant == 0.0f)
+        {
+            shapeConstant = 1.0f;
+        }
+        momentOfInertia = shapeConstant * mass * radius * radius;
         angularVelocity = angularMomentum / momentOfInertia;
     }
 
@@ -30,7 +36,7 @@ public class Spin : MonoBehaviour
     void Update()
     {
         transform.localScale = new Vector3(radius, transform.localScale.y, radius);
-        momentOfInertia = mass * radius * radius;
+        momentOfInertia = shapeConstant * mass * radius * radius;
         angularVelocity = angularMomentum / momentOfInertia;
         transform.Rotate(0.0f, angularVelocity * Time.deltaTime, 0.0f, Space.Self);
     }
